@@ -3,7 +3,9 @@ module Warden
     module Rails
       module ControllerHelpers
         def self.included(klass)
-          klass.helper_method(:github_authenticated?, :github_user)
+          if klass.respond_to?(:helper_method)
+            klass.helper_method(:github_authenticated?, :github_user)
+          end
         end
 
         # Initiates the OAuth flow if not already authenticated for the
